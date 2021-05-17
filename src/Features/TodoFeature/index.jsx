@@ -35,13 +35,21 @@ function TodoFeature(props) {
     return JSON.parse(localStorage.getItem('todo_list')) || initTodoList;
   });
 
-  const handleTodoClick = (todo, idx, checked) => {
-    // console.log(todo);
+  const handleRemove = (todo) => {
+    console.log(todo);
     const index = todoList.findIndex((x) => x.id === todo.id);
     if (index < 0) return;
 
     const newTodoList = [...todoList];
     newTodoList.splice(index, 1);
+
+    setTodoList(newTodoList);
+
+    localStorage.setItem('todo_list', JSON.stringify(newTodoList));
+  };
+
+  const handleTodoClick = (idx, checked) => {
+    const newTodoList = [...todoList];
 
     const newTodo = {
       ...newTodoList[idx],
@@ -74,7 +82,7 @@ function TodoFeature(props) {
 
       <TodoForm onSubmit={handleTodoFormSubmit} />
 
-      <TodoList todoList={todoList} onTodoClick={handleTodoClick} />
+      <TodoList todoList={todoList} onTodoClick={handleTodoClick} onTodoRemove={handleRemove} />
     </div>
   );
 }

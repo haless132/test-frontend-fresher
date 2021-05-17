@@ -7,15 +7,10 @@ import './styles.scss';
 TodoList.propTypes = {
   todoList: PropTypes.array.isRequired,
   onTodoClick: PropTypes.func,
+  onTodoRemive: PropTypes.func,
 };
 
-function TodoList({ todoList, onTodoClick = null }) {
-  const handleClick = (todo) => {
-    if (onTodoClick) {
-      onTodoClick(todo);
-    }
-  };
-
+function TodoList({ todoList, onTodoClick = null, onTodoRemove = null }) {
   return (
     <div>
       <Container>
@@ -39,7 +34,7 @@ function TodoList({ todoList, onTodoClick = null }) {
 
                   <p className='desc'>{todo.title}</p>
                 </div>
-                <div className='item-delete' onClick={() => handleClick(todo)}>
+                <div className='item-delete' onClick={() => onTodoRemove && onTodoRemove(todo)}>
                   <DeleteOutlineIcon />
                 </div>
               </li>
