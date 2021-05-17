@@ -11,11 +11,6 @@ TodoForm.propTypes = {
 function TodoForm({ onSubmit = null }) {
   const [value, setValue] = useState('');
 
-  const handleValueChange = (e) => {
-    console.log(e.target.value);
-    setValue(e.target.value);
-  };
-
   const handleClick = (e) => {
     e.preventDefault();
     if (!onSubmit) return;
@@ -28,6 +23,12 @@ function TodoForm({ onSubmit = null }) {
 
     setValue('');
   };
+
+  const handleValueChange = (e) => {
+    console.log(e.target.value);
+    setValue(e.target.value);
+  };
+
   return (
     <div>
       <Container>
