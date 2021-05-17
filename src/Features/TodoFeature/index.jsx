@@ -70,7 +70,7 @@ function TodoFeature(props) {
 
   return (
     <div>
-      <h2 style={{ textAlign: 'center' }}>Test frontend</h2>
+      <h2 style={{ textAlign: 'center' }}>Test frontend Fresher</h2>
 
       <TodoForm onSubmit={handleTodoFormSubmit} />
 
