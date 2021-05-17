@@ -1,43 +1,80 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TodoForm from './Components/TodoForm';
 import TodoList from './Components/TodoList';
 
 TodoFeature.propTypes = {};
 
 function TodoFeature(props) {
-  const todoList = [
+  const initTodoList = [
     {
       id: 1,
       title: 'Test React Ant Design Todo List',
-      status: 'unfinished',
+      status: 'todo',
     },
 
     {
       id: 2,
       title: 'Write About React And Ant Design',
-      status: 'unfinished',
+      status: 'todo',
     },
 
     {
       id: 3,
       title: 'Finalize Presentation',
-      status: 'finish',
+      status: 'completed',
     },
 
     {
       id: 4,
       title: 'Book Fights To Ireland',
-      status: 'unfinished',
+      status: 'todo',
     },
   ];
+
+  const [todoList, setTodoList] = useState(() => {
+    return JSON.parse(localStorage.getItem('todo_list')) || initTodoList;
+  });
+
+  const handleTodoClick = (todo, idx, checked) => {
+    // console.log(todo);
+    const index = todoList.findIndex((x) => x.id === todo.id);
+    if (index < 0) return;
+
+    const newTodoList = [...todoList];
+    newTodoList.splice(index, 1);
+
+    const newTodo = {
+      ...newTodoList[idx],
+      status: checked ? 'completed' : 'todo',
+    };
+
+    newTodoList[idx] = newTodo;
+    setTodoList(newTodoList);
+
+    localStorage.setItem('todo_list', JSON.stringify(newTodoList));
+  };
+
+  const handleTodoFormSubmit = (formValues) => {
+    // console.log('Form submit: ', formValues);
+    const newTodo = {
+      id: todoList.length + 1,
+      ...formValues,
+    };
+
+    const newTodoList = [...todoList];
+    newTodoList.push(newTodo);
+    setTodoList(newTodoList);
+
+    localStorage.setItem('todo_list', JSON.stringify(newTodoList));
+  };
 
   return (
     <div>
       <h2 style={{ textAlign: 'center' }}>Test frontend</h2>
 
-      <TodoForm />
+      <TodoForm onSubmit={handleTodoFormSubmit} />
 
-      <TodoList todoList={todoList} />
+      <TodoList todoList={todoList} onTodoClick={handleTodoClick} />
     </div>
   );
 }
