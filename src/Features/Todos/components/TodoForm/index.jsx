@@ -19,6 +19,7 @@ function TodoForm({ onSubmit = null }) {
   const handleClick = (e) => {
     e.preventDefault();
     if (!onSubmit) return;
+
     const formValues = {
       title: value,
     };
@@ -32,6 +33,7 @@ function TodoForm({ onSubmit = null }) {
       <Container>
         <form className='todo-form'>
           <input type='text' value={value} onChange={handleValueChange} />
+
           <button onClick={handleClick}>
             <AddCircleOutlineIcon />
             <p> Add</p>

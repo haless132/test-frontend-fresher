@@ -36,7 +36,7 @@ function TodoFeature(props) {
   });
 
   const handleRemove = (todo) => {
-    console.log(todo);
+    // console.log(todo);
     const index = todoList.findIndex((x) => x.id === todo.id);
     if (index < 0) return;
 
