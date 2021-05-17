@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import TodoForm from './Components/TodoForm';
-import TodoList from './Components/TodoList';
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
 
 TodoFeature.propTypes = {};
 

@@ -1,5 +1,5 @@
 import './App.scss';
-import TodoFeature from './Features/TodoFeature';
+import TodoFeature from './Features/Todos';
 
 function App() {
   return (
